@@ -1,25 +1,36 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ContactInfo } from '../models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../molecules';
-import { Button } from '../atoms';
+import { Button, IconWaiting } from '../atoms';
 
 const requestbinUrl = import.meta.env.VITE_REQUESTBIN_URL;
 
 export const ContactForm: FunctionComponent = () => {
+  const [isSending, setIsSending] = useState(false);
+
   const { register, handleSubmit, control, reset } = useForm<ContactInfo>({
     resolver: zodResolver(ContactInfo),
   });
 
   const sendContactInfo = handleSubmit(async (data) => {
-    await fetch(
-      requestbinUrl,
-      {
-        method: 'POST',
-        body: JSON.stringify(data),
-      }
-    );
+    setIsSending(true);
+
+    try {
+      await fetch(
+        requestbinUrl,
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+        }
+      );
+    } catch(ex) {
+      // TODO: handle send errors rather than ignoring them
+      console.log("WE SHOULD LOG THIS SOMEWHERE", ex);
+    }
+
+    setIsSending(false);
 
     reset();
   });
@@ -48,8 +59,11 @@ export const ContactForm: FunctionComponent = () => {
       <textarea className="outline-none col-span-full h-80 border rounded-md border-primary p-2" {...register("message")} />
 
       <div className="flex col-span-full justify-end mt-8 space-x-4">
-        <Button type="button" variant='secondary' outline onClick={resetForm}>Clear</Button>
-        <Button type="submit">Send</Button>
+        <Button type="button" variant='secondary' outline onClick={resetForm} disabled={isSending}>Clear</Button>
+        <Button type="submit" disabled={isSending}>
+          { isSending && (<IconWaiting className="animate-spin" />)}
+          { isSending ? 'Sending' : 'Send' }
+        </Button>
       </div>
     </form>
   );

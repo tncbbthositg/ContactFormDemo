@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, DetailedHTMLProps, FunctionComponent } from 'reac
 import { cn } from '../utilities';
 
 const buttonStyleFactory = cva(
-  "border px-8 py-2 rounded text-lg text-white",
+  "border px-8 py-2 rounded text-lg text-white flex items-center gap-x-2",
   {
     variants: {
       variant: {
@@ -12,6 +12,9 @@ const buttonStyleFactory = cva(
       },
       outline: {
         true: 'bg-transparent',
+      },
+      disabled: {
+        true: 'opacity-50',
       }
     },
     compoundVariants: [
@@ -20,7 +23,6 @@ const buttonStyleFactory = cva(
     ],
     defaultVariants: {
       variant: 'primary',
-      outline: false,
     }
   }
 );
