@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { ContactInfo } from '../models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../molecules';
+import { Button } from '../atoms';
 
 const requestbinUrl = import.meta.env.VITE_REQUESTBIN_URL;
 
@@ -47,8 +48,8 @@ export const ContactForm: FunctionComponent = () => {
       <textarea className="outline-none col-span-full h-80 border rounded-md border-primary p-2" {...register("message")} />
 
       <div className="flex col-span-full justify-end mt-8 space-x-4">
-        <button type="button" className="border border-primary px-8 py-2 rounded text-primary text-lg" onClick={resetForm}>Clear</button>
-        <button type="submit" className="bg-primary border border-primary px-8 py-2 rounded text-white text-lg">Send</button>
+        <Button type="button" className="border border-primary px-8 py-2 rounded text-primary text-lg" onClick={resetForm}>Clear</Button>
+        <Button type="submit" className="bg-primary border border-primary px-8 py-2 rounded text-white text-lg">Send</Button>
       </div>
     </form>
   );
