@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form"
 import { Input } from "./molecules";
 import { ContactInfo } from "./models";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback } from "react";
 
 const requestbinUrl = import.meta.env.VITE_REQUESTBIN_URL;
 
 function App() {
-  const { register, handleSubmit, control } = useForm<ContactInfo>({
+  const { register, handleSubmit, control, reset } = useForm<ContactInfo>({
     resolver: zodResolver(ContactInfo),
   });
 
@@ -17,8 +18,15 @@ function App() {
         method: 'POST',
         body: JSON.stringify(data),
       }
-    )
+    );
+
+    reset();
   });
+
+  const resetForm = useCallback(
+    () => reset(),
+    [reset]
+  );
 
   return (
     <div className="container bg-white rounded-lg my-16 p-8 mx-auto">
@@ -39,7 +47,8 @@ function App() {
         <h3 className="text-primary font-medium text-xl mt-8 col-span-full">Message:</h3>
         <textarea className="outline-none col-span-full h-80 border rounded-md border-primary p-2" {...register("message")} />
 
-        <div className="flex col-span-full justify-end mt-8">
+        <div className="flex col-span-full justify-end mt-8 space-x-4">
+          <button type="button" className="border border-primary px-8 py-2 rounded text-primary text-lg" onClick={resetForm}>Clear</button>
           <button type="submit" className="bg-primary border border-primary px-8 py-2 rounded text-white text-lg">Send</button>
         </div>
       </form>
