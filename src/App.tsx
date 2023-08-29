@@ -37,7 +37,7 @@ function App() {
         </div>
 
         <h3 className="text-primary font-medium text-xl mt-8 col-span-full">Message:</h3>
-        <textarea className="outline-none col-span-full h-80 border border-primary p-2" {...register("message")} />
+        <textarea className="outline-none col-span-full h-80 border rounded-md border-primary p-2" {...register("message")} />
 
         <div className="flex col-span-full justify-end mt-8">
           <button type="submit" className="bg-primary border border-primary px-8 py-2 rounded text-white text-lg">Send</button>
