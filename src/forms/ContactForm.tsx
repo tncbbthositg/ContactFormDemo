@@ -1,37 +1,20 @@
-import { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { ContactInfo } from '../models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../molecules';
 import { Button, IconWaiting } from '../atoms';
-
-const requestbinUrl = import.meta.env.VITE_REQUESTBIN_URL;
+import { useSendEmail } from '../hooks/useSendEmail';
 
 export const ContactForm: FunctionComponent = () => {
-  const [isSending, setIsSending] = useState(false);
+  const { isSending, sendEmail } = useSendEmail();
 
   const { register, handleSubmit, control, reset } = useForm<ContactInfo>({
     resolver: zodResolver(ContactInfo),
   });
 
   const sendContactInfo = handleSubmit(async (data) => {
-    setIsSending(true);
-
-    try {
-      await fetch(
-        requestbinUrl,
-        {
-          method: 'POST',
-          body: JSON.stringify(data),
-        }
-      );
-    } catch(ex) {
-      // TODO: handle send errors rather than ignoring them
-      console.log("WE SHOULD LOG THIS SOMEWHERE", ex);
-    }
-
-    setIsSending(false);
-
+    await sendEmail(data, 'contact_form');
     reset();
   });
 
