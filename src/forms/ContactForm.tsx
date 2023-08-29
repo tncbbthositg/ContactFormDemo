@@ -29,7 +29,7 @@ export const ContactForm: FunctionComponent = () => {
   );
 
   return (
-    <form className="grid grid-cols-2 gap-x-4 gap-y-4" onSubmit={sendContactInfo}>
+    <form className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4" onSubmit={sendContactInfo}>
       <h1 className="text-primary font-medium text-3xl col-span-full">Contact Us</h1>
 
       <Input type="text" placeholder="First Name" control={control} name='firstName' />
