@@ -3,11 +3,12 @@ import { ButtonHTMLAttributes, DetailedHTMLProps, FunctionComponent } from 'reac
 import { cn } from '../utilities';
 
 const buttonStyleFactory = cva(
-  "border px-8 py-2 rounded text-lg",
+  "border px-8 py-2 rounded text-lg text-white",
   {
     variants: {
       variant: {
-        primary: 'border-primary text-white bg-primary',
+        primary: 'border-primary bg-primary',
+        secondary: 'border-secondary bg-secondary'
       },
       outline: {
         true: 'bg-transparent',
@@ -15,9 +16,11 @@ const buttonStyleFactory = cva(
     },
     compoundVariants: [
       { variant: 'primary', outline: true, className: 'text-primary' },
+      { variant: 'secondary', outline: true, className: 'text-secondary' },
     ],
     defaultVariants: {
       variant: 'primary',
+      outline: false,
     }
   }
 );

@@ -48,7 +48,7 @@ export const ContactForm: FunctionComponent = () => {
       <textarea className="outline-none col-span-full h-80 border rounded-md border-primary p-2" {...register("message")} />
 
       <div className="flex col-span-full justify-end mt-8 space-x-4">
-        <Button type="button" outline onClick={resetForm}>Clear</Button>
+        <Button type="button" variant='secondary' outline onClick={resetForm}>Clear</Button>
         <Button type="submit">Send</Button>
       </div>
     </form>

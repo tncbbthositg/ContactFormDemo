@@ -11,6 +11,7 @@ export default {
     colors: {
       ...colors,
       primary: colors.teal[600],
+      secondary: colors.orange[600],
     }
   },
   plugins: [],
