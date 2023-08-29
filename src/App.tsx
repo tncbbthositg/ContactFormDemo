@@ -1,18 +1,14 @@
 import { useForm } from "react-hook-form"
-import { Input } from "./atoms";
-
-interface ContactInfo {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  phoneNumber: string;
-  message?: string;
-}
+import { Input } from "./molecules";
+import { ContactInfo } from "./models";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const requestbinUrl = import.meta.env.VITE_REQUESTBIN_URL;
 
 function App() {
-  const { register, handleSubmit, control } = useForm<ContactInfo>();
+  const { register, handleSubmit, control } = useForm<ContactInfo>({
+    resolver: zodResolver(ContactInfo),
+  });
 
   const sendContactInfo = handleSubmit(async (data) => {
     await fetch(
