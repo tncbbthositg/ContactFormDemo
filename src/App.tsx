@@ -1,20 +1,24 @@
 function App() {
   return (
     <div className="container bg-white rounded-lg my-16 p-8 mx-auto">
-      <h1 className="text-teal-600 font-medium text-3xl mb-4">Contact Us</h1>
+      <form className="grid grid-cols-2 gap-x-4 gap-y-4">
+        <h1 className="text-teal-600 font-medium text-3xl col-span-full">Contact Us</h1>
+        
+        <input type="text" placeholder="First Name" className="text-teal-600 border-b border-teal-600 text-xl py-2" />
+        <input type="text" placeholder="Last Name" className="text-teal-600 border-b border-teal-600 text-xl py-2" />
 
-      <form className="grid grid-cols-2 gap-x-4 gap-y-8">
-        <input type="text" placeholder="First Name" />
-        <input type="text" placeholder="Last Name" />
-
-        <input className="mt-8 col-span-full" type="text" placeholder="Phone Number" />
-        <input type="text" placeholder="Email Address" />
+        <div className="mt-8 col-span-full">
+          <input type="text" placeholder="Phone Number" className="w-full text-teal-600 border-b border-teal-600 text-xl py-2" />
+        </div>
+        <div className="col-span-full">
+          <input type="text" placeholder="Email Address" className="w-full text-teal-600 border-b border-teal-600 text-xl py-2" />
+        </div>
         
         <h3 className="text-teal-600 font-medium text-xl mt-8 col-span-full">Message:</h3>
-        <input className="col-span-full" type="text" placeholder="Email Address" />
+        <textarea className="col-span-full h-80 border border-teal-600" />
 
-        <div className="flex col-span-full justify-end">
-          <button type="submit">Send</button>
+        <div className="flex col-span-full justify-end mt-8">
+          <button type="submit" className="bg-teal-600 border border-teal-600 px-8 py-2 rounded text-white text-lg">Send</button>
         </div>
       </form>
     </div>
