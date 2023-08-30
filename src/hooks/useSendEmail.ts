@@ -30,25 +30,25 @@ const fakeEmail: SendFunction = async (info, emailTemplate) => {
   );
 };
 
-  export function useSendEmail(): UseSendEmailResult {
-    const [isSending, setIsSending] = useState(false);
+export function useSendEmail(): UseSendEmailResult {
+  const [isSending, setIsSending] = useState(false);
 
-    const sendEmail: SendFunction = useCallback(
-      async (info, emailTemplate) => {
-        setIsSending(true);
+  const sendEmail: SendFunction = useCallback(
+    async (info, emailTemplate) => {
+      setIsSending(true);
 
-        try {
-          sendEmailJs(info, emailTemplate);
-          fakeEmail(info, emailTemplate);
-        } catch(ex) {
-          // TODO: handle send errors rather than ignoring them
-          console.log("WE SHOULD LOG THIS SOMEWHERE", ex);
-        }
+      try {
+        sendEmailJs(info, emailTemplate);
+        fakeEmail(info, emailTemplate);
+      } catch(ex) {
+        // TODO: handle send errors rather than ignoring them
+        console.log("WE SHOULD LOG THIS SOMEWHERE", ex);
+      }
 
-        setIsSending(false);
-      },
-      []
-      );
+      setIsSending(false);
+    },
+    []
+  );
 
-      return { isSending, sendEmail };
-    }
+  return { isSending, sendEmail };
+}
